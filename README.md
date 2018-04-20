@@ -1,6 +1,11 @@
 # VhackOs
 VhackOs lib I made for final project for cyb 205. 
-Prof.Leslie Corbo tr 
+Student number: 18
+Prof.Leslie Corbo Tue-Thur 
+
+
+
+
 ***Install gems***
 ```
 gem install colorize
