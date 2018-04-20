@@ -16,5 +16,5 @@ gem inatall pastel
 ***CONACT***
 ```
   Mameade@utica.edu
-  If  you need to contact me use that email or you can find me around campus.
+  If you need to contact me use that email or you can find me around campus.
   ```
