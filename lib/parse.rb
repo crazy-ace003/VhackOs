@@ -76,7 +76,6 @@ module Parse
         bank = VhackXt.Banking(username)
         table = Terminal::Table.new do |t1|
         a = 0
-        rows = []
         rows << [
             Comma(bank["money"]) , 
             Comma(bank["savings"]), 
@@ -99,7 +98,6 @@ module Parse
     def ParseRemoteBanking(username, target)
         rows = TTY::Table.new
         banking = VhackXt.RemoteBanking(username, target)
-        rows = []
         rows << ["Username",        banking["remoteusername"]]
         rows << ["UID",             banking["target_id"]]
         rows << ["Money",           Comma(banking["money"])]
