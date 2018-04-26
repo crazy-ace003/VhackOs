@@ -1,27 +1,27 @@
 require_relative 'vhackOs'
 begin
     require 'terminal-table'
-rescue => e
+rescue LoadError => e
   puts e.message
   puts"installing ... terminal table..."
   `gem install terminal-table`
 end
 begin
     require'colorize'
-rescue => e
+rescue LoadError => e
   puts e.message
   puts"Installing colorize...."
 end
 begin
     require 'pastel'
-rescue => e
+rescue LoadError => e
   puts e.message
   puts"installing pastel.."
   `gem install pastel`
 end
 begin
     require'tty-table'
-rescue => e
+rescue LoadError => e
   puts e.message
   puts"installing TTY-Table..."
   `gem install tty-table`
