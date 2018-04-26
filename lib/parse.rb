@@ -1,8 +1,31 @@
 require_relative 'vhackOs'
-require 'terminal-table'
-require'colorize'
-require 'pastel'
-require'tty-table'
+begin
+    require 'terminal-table'
+rescue => e
+  puts e.message
+  puts"installing ... terminal table..."
+  `gem install terminal-table`
+end
+begin
+    require'colorize'
+rescue => e
+  puts e.message
+  puts"Installing colorize...."
+end
+begin
+    require 'pastel'
+rescue => e
+  puts e.message
+  puts"installing pastel.."
+  `gem install pastel`
+end
+begin
+    require'tty-table'
+rescue => e
+  puts e.message
+  puts"installing TTY-Table..."
+  `gem install tty-table`
+end
 require'csv'
 module Parse
   class << self
