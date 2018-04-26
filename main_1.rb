@@ -1,6 +1,13 @@
 require_relative 'lib/vhackOs'
-require 'colorize'
 require_relative 'lib/parse'
+begin
+	require 'colorize'
+rescue LoadError => e
+	puts e.message
+	puts"Installing Colorize..."
+	`gem insall colorize`
+end
+
 username = ""
 password = ""
 print"Enter Username: "
