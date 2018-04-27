@@ -98,13 +98,12 @@ module Parse
         rows = TTY::Table.new header: ['Money', 'Savings', 'total', 'Max Saving', 'Trans Count']
         bank = VhackXt.Banking(username)
         table = Terminal::Table.new do |t1|
-        a = 0
         rows << [
-            Comma(bank["money"]) , 
-            Comma(bank["savings"]), 
-            Comma(bank["total"]), 
-            Comma(bank["maxsavings"]), 
-            Comma(bank["transcount"])
+                    Comma(bank["money"]) , 
+                    Comma(bank["savings"]), 
+                    Comma(bank["total"]), 
+                    Comma(bank["maxsavings"]), 
+                    Comma(bank["transcount"])
                 ]
             puts"\n"
             puts rows.render(:unicode, alignment: [:center])
@@ -112,7 +111,6 @@ module Parse
     end
     def ParseMassAccountCreator()
         rows = TTY::Table.new
-        rows = []
         rows << ["1.", "Prefix"]
         rows << ["2.", "Random Names"]
         rows << ["3.", "Install gem"]
@@ -127,7 +125,6 @@ module Parse
         rows << ["Status",          VhackXt.GetRemoteBankingType(banking["open"])]
         puts"                             Remote Bank Target Info                                   ".green
         puts rows.render(:unicode, alignment: [:center])
-
     end
     def ParseBanking(username)
         bank = VhackXt.Banking(username)
@@ -140,11 +137,11 @@ module Parse
                     break
                 end
                 rows2 << [
-                      AnonymousRed(bank["transactions"][i]["to_ip"]),
-                      Comma(bank["transactions"][i]["amount"]),
-                      bank["transactions"][i]["to_id"],
-                      UnixConvert(bank["transactions"][i]["time"])
-                      ]
+                            AnonymousRed(bank["transactions"][i]["to_ip"]),
+                            Comma(bank["transactions"][i]["amount"]),
+                            bank["transactions"][i]["to_id"],
+                            UnixConvert(bank["transactions"][i]["time"])
+                         ]
                 t.headings  = ['To Ip', 'Amount', 'To ID', 'Time']
                 t.rows      = rows2
                 t.style = {:width => 100, :border_x => "=", :border_i => "x", :alignment => :center}
@@ -163,8 +160,8 @@ module Parse
                 break
             end
         rows << [
-                  VhackXt.GetAppType(apps[i]["appid"]),
-                  apps[i]["level"]
+                    VhackXt.GetAppType(apps[i]["appid"]),
+                    apps[i]["level"]
                 ]
         table = Terminal::Table.new :rows => rows, :headings => ["App Name", "Level"], :style => {:width => 30, :border_x => "=", :border_i => "x", :alignment => :center}
         end
@@ -184,21 +181,19 @@ module Parse
                                 user_data[i]["username"]
                             ]
                     if File.readlines("database/Username.csv").grep(/#{user_data[i]["ip"]}/).any?
-                            puts"Already in it".yellow
+                        puts
                     else
-                        puts user_data[i]["ip"]
                         CSV.open('database/Username.csv', 'a') do |csv|
                             csv << array
                         end
                     end 
                 rows << [ 
-                         user_data[i]["ip"],
-                         user_data[i]["username"],
-                         CheckBrute(user_data[i]["brute"])
+                            user_data[i]["ip"],
+                            user_data[i]["username"],
+                            CheckBrute(user_data[i]["brute"])
                         ]
             table = Terminal::Table.new :rows => rows, :headings => ["IP", "Username", " Brute"], :style => {:width => 80, :border_x => "=", :border_i => "x", :alignment => :center}
                 end
-        
             puts"                             Connection Manager                                   ".green
             puts table
         rescue => e
@@ -210,16 +205,15 @@ module Parse
     def ParseExploit(username, target)
         exploit = VhackXt.ExploitTarget(username, target)
         info = [
-                "#{exploit}",
-                "Ip: #{exploit["cm"]}",
-                "Username: #{exploit["cm"]["username"]}",
-                "Brute: #{exploit["cm"]["brute"]}",
-                "Exploits Left: #{exploit["exploits"]}"
+                    "#{exploit}",
+                    "Ip: #{exploit["cm"]}",
+                    "Username: #{exploit["cm"]["username"]}",
+                    "Brute: #{exploit["cm"]["brute"]}",
+                    "Exploits Left: #{exploit["exploits"]}"
                ]
                return info
     end
     def ParseNetwork(username)
-        rows = []
         row = TTY::Table.new header: ['Ip', 'fw', 'Level', 'Open']
         network = VhackXt.GetNetwork(username)
         length  = network["ips"].length
@@ -228,31 +222,26 @@ module Parse
                 break
             end
         row << [
-                 network["ips"][i]["ip"],
-                 Comma(network["ips"][i]["fw"]),
-                 network["ips"][i]["level"],
-                 ExploitStatus(network["ips"][i]["open"])
+                    network["ips"][i]["ip"],
+                    Comma(network["ips"][i]["fw"]),
+                    network["ips"][i]["level"],
+                    ExploitStatus(network["ips"][i]["open"])
                 ]
         end
              puts row.render(:unicode, alignment: [:center])
     end
     def ParseMoneyExploit(username, target, amount)
         remote = VhackXt.MoneyExploit(username, target, amount)
-        row = TTY::Table.new 
-        rows = []
+        row = TTY::Table.new
         row  << ["Remote IP",        target]
         row  << ["Remote ID",        remote["target_id"]]
         row  << ["Remote Username",  remote["remoteusername"]]
         row << ["Remote Money",     Comma(remote["money"])]
         puts row.render(:unicode)
-       
         #stealMoney = VhackXt.StealRemoteMoney(username, target, amount)
-        #table = Terminal::Table.new :rows => rows, :style => {:width => 80, :border_x => "=", :border_i => "x", :alignment => :center}
-        #puts table
         VhackXt.StealRemoteMoney(username, target, amount)
     end
     def ParseBrute(username)
-        rows = []
         row = TTY::Table.new header: ['IP', 'Username', 'Start', 'End', 'Now', 'Status']
         brute  = VhackXt.BruteList(username)
         if brute["brutes"].nil?
@@ -263,7 +252,6 @@ module Parse
                 if i.to_i == length.to_i
                     break
                 end
-            
             result = VhackXt.BruteTypes(brute["brutes"][i]["result"])
             row << [
                       brute["brutes"][i]["user_ip"],
@@ -278,7 +266,6 @@ module Parse
             puts row.render(:unicode)
     end
     def Main()
-        rows = []
         rows = TTY::Table.new 
         f = ["",
                     "UserInfo",
@@ -319,7 +306,6 @@ module Parse
                 end
     def ParseMinerInfo(username)
         mineInfo = VhackXt.GetMiner(username)
-        rows = []
         rows = TTY::Table.new 
         rows << ["Running",  IsRunning(mineInfo["running"])]
         rows << ["Applied",  IsRunning(mineInfo["applied"])]
@@ -329,26 +315,22 @@ module Parse
         puts rows.render(:unicode, alignment: [:center])
     end
     def ParseStoreStats(username, total, amount)
-        rows = []
         rows = TTY::Table.new 
         bank = VhackXt.Banking(username)
         rows << ['Current Balance',  Comma(bank['money'])]
         rows << ['Total Spent',      Comma(total)]
         rows << ['Amount Upgraded',  Comma(amount)]
         puts rows.render(:unicode, alignment: [:center])
-
     end
     def ParseSpeedUp(username)
         rows = TTY::Table.new 
         speed = VhackXt.SpeedUpUpgrades(username)
-        rows = []
         rows << ["Level",      speed["level"]]
         rows << ["Netcoins",   Comma(speed["netcoins"])]
         rows << ["Boosters",   Comma(speed["boosters"])]
         puts rows.render(:unicode, alignment: [:center])
     end
     def ParseSDK(username)
-        rows = []
         rows = TTY::Table.new 
         sdk = VhackXt.GetSDK(username)
         rows << ['SDK Level',        Comma(sdk["sdk"])]
@@ -358,14 +340,12 @@ module Parse
         puts"========================================="
     end
     def SDKOptions()
-        rows = []
         rows = TTY::Table.new 
         rows << ["1", "Buy Bulk"]
         rows << ["2", "Buy single"]
         puts rows.render(:unicode)
     end
     def ParseUpgrades(username)
-        rows = []
         rows = TTY::Table.new header: ["App Name", "Level", "start", "End", "Now"]
         upgrade = VhackXt.GetTasks(username)
         if upgrade["updates"].nil?
@@ -375,16 +355,14 @@ module Parse
             for i in 0..length
                 if i.to_i == length.to_i
                     break
-                end
-            
+                end   
             rows << [
-                     VhackXt.GetAppType(upgrade["updates"][i]["appid"]),
-                     upgrade["updates"][i]["level"],
-                     UnixConvert(upgrade["updates"][i]["start"]),
-                     UnixConvert(upgrade["updates"][i]["end"]),
-                     UnixConvert(upgrade["updates"][i]["now"]),
-                    ]
-            
+                        VhackXt.GetAppType(upgrade["updates"][i]["appid"]),
+                        upgrade["updates"][i]["level"],
+                        UnixConvert(upgrade["updates"][i]["start"]),
+                        UnixConvert(upgrade["updates"][i]["end"]),
+                        UnixConvert(upgrade["updates"][i]["now"]),
+                    ]   
             end
         end
             puts rows.render(:unicode, alignment: [:center])
@@ -420,19 +398,16 @@ module Parse
         rows << ['1.',  'Colect Packages']
         rows << ['2.',  'Upgrade AV']
         rows << ['3.',  'Upgrade FW']
-        #table = Terminal::Table.new :rows => rows, :style => {:width => 30, :border_x => "=", :border_i => "x", :alignment => :center}
         puts rows.render(:unicode)
     end
     def ParseLogIn()
         rows = TTY::Table.new 
-        rows = []
         rows << ['1',    'Login Normal']
         rows << ['2',    'File Login']
         puts rows.render(:unicode, alignment: [:center])
     end
     def ParseCreateLog()
-        row = TTY::Table.new 
-        rows = []
+        row = TTY::Table.new
         rows << ['1.',  'Create new Log']
         rows << ['2.',  'Delete log']
         rows << ['3.',  'View Files']
@@ -461,11 +436,9 @@ module Parse
                 puts table
                 table1 = Terminal::Table.new :rows => rows1, :headings => ["Server", "Server Pieces", "AV Pieces", "FW Pieces"], :style => {:width => 70, :border_x => "=", :border_i => "x", :alignment => :center}
                 puts table1
-
     end
     def RankOrder()
         row = TTY::Table.new 
-        rows = []
         rows << ['1.',  'FW']
         rows << ['2.',  'BP']
         rows << ['3.',  'SDK']
@@ -484,19 +457,18 @@ module Parse
                     break
                 end
                 rows2 << [
-                      VhackXt.GetAppType(store["apps"][i]["appid"]),
-                      Comma(store["apps"][i]["level"]),
-                      Comma(store["apps"][i]["price"]),
-                      Comma(store["apps"][i]["baseprice"]),
-                      Comma(store["apps"][i]["factor"]),
-                      store["apps"][i]["running"], 
-                      ]
+                            VhackXt.GetAppType(store["apps"][i]["appid"]),
+                            Comma(store["apps"][i]["level"]),
+                            Comma(store["apps"][i]["price"]),
+                            Comma(store["apps"][i]["baseprice"]),
+                            Comma(store["apps"][i]["factor"]),
+                            store["apps"][i]["running"], 
+                         ]
             end
         end
         puts rows2.render(:unicode, alignment: [:center])
     end
     def SpamTable(username)
-        rows = []
         row = TTY::Table.new 
         spam  = VhackXt.GetSpam(username)
         row  << ['Spam Level ',    Comma(spam["spamlvl"])]
@@ -507,7 +479,6 @@ module Parse
         puts row.render(:unicode)
     end
     def ParseDownloadApp()
-        rows = []
         row = TTY::Table.new 
         row  << ['1)',  'Download AV']
         row  << ['2)',  'Download Firewall']
@@ -519,7 +490,6 @@ module Parse
         puts row.render(:unicode)
     end
     def AppsListTable()
-        rows = []
         rows = TTY::Table.new
         rows << ['AntiVirus',       1]
         rows << ['Firewall',        2]
@@ -533,16 +503,15 @@ module Parse
     def ParseSpam(username)
         spam = VhackXt.GetSpam(username)
         spam_info = [
-                      "Spam Level: #{spam["spamlvl"]}",
-                      "Income: $ #{spam["income"].to_s.reverse.gsub(/(\d{3})(?=\d)/, '\\1,').reverse}",
-                      "Base Income: $ #{spam["baseincome"].to_s.reverse.gsub(/(\d{3})(?=\d)/, '\\1,').reverse}",
-                      "Total Income: $ #{spam["totalincome"].to_s.reverse.gsub(/(\d{3})(?=\d)/, '\\1,').reverse}",
-                      "PayOut: $ #{spam["payout"].to_s.reverse.gsub(/(\d{3})(?=\d)/, '\\1,').reverse}"
-                  ]
+                        "Spam Level: #{spam["spamlvl"]}",
+                        "Income: $ #{spam["income"].to_s.reverse.gsub(/(\d{3})(?=\d)/, '\\1,').reverse}",
+                        "Base Income: $ #{spam["baseincome"].to_s.reverse.gsub(/(\d{3})(?=\d)/, '\\1,').reverse}",
+                        "Total Income: $ #{spam["totalincome"].to_s.reverse.gsub(/(\d{3})(?=\d)/, '\\1,').reverse}",
+                        "PayOut: $ #{spam["payout"].to_s.reverse.gsub(/(\d{3})(?=\d)/, '\\1,').reverse}"
+                    ]
                   return spam_info
     end
     def ParseUserInfo(login_info)
-        rows = []
         rows = TTY::Table.new
         rows << ["Username",         login_info["username"]]
         rows << ["IP",               login_info["ipaddress"]]
