@@ -11,9 +11,12 @@ gem install colorize
 gem install tty-table
 gem install terminal-table
 gem inatall pastel
+
 ```
 ***HOW TO RUN***
-```ruby main_1.rb```
+```
+ruby main_1.rb
+```
 
 ***CONACT***
 ```
