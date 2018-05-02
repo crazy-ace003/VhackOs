@@ -238,7 +238,6 @@ module Parse
         row  << ["Remote Username",  remote["remoteusername"]]
         row << ["Remote Money",     Comma(remote["money"])]
         puts row.render(:unicode)
-        #stealMoney = VhackXt.StealRemoteMoney(username, target, amount)
         VhackXt.StealRemoteMoney(username, target, amount)
     end
     def ParseBrute(username)
@@ -333,11 +332,9 @@ module Parse
     def ParseSDK(username)
         rows = TTY::Table.new 
         sdk = VhackXt.GetSDK(username)
-        rows << ['SDK Level',        Comma(sdk["sdk"])]
-        rows << ['Exploits',         Comma(sdk["exploits"])]
-        puts"========================================="
+        rows << ['SDK Level',   Comma(sdk["sdk"])]
+        rows << ['Exploits',    Comma(sdk["exploits"])]
         puts rows.render(:unicode)
-        puts"========================================="
     end
     def SDKOptions()
         rows = TTY::Table.new 
@@ -449,7 +446,6 @@ module Parse
     def ParseStore(username)
         rows2 = TTY::Table.new header: ['App Type', 'Level', 'Price','Base Price', 'Factor', 'Running']
         store = VhackXt.GetStore(username)
-        puts store
         table = Terminal::Table.new do |t|
         length = store["apps"].length
             for i in 1..length
