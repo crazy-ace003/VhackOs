@@ -15,7 +15,7 @@ module VhackXt
         user = userAndPass[0]
         pass = userAndPass[1]
         url = "https://api.vhack.cc/mobile/15/#{php}?user=#{user}&pass=#{pass}"
-        response = open(url, 'User-Agent' => 'Dalvik/1.6.0 (Linux; U; Android 4.1.1; BroadSign Xpress 1.0.14 B- (720) Build/JRO03H)', 'api-version' => '2').read
+        response = open(url, 'User-Agent' => 'Dalvik/1.6.0 (Linux; U; Android 4.1.1; BroadSign Xpress 1.0.14 B- (720) Build/JRO03H)').read
         json = JSON.parse(response)
         return json
     end
@@ -45,7 +45,7 @@ module VhackXt
     	user = userAndPass[0]
         pass = userAndPass[1]
         url = "https://api.vhack.cc/mobile/15/login.php?user=#{user}&pass=#{pass}"
-        response = open(url, 'User-Agent' => 'Discord bot', 'api-version' => '2').read
+        response = open(url, 'User-Agent' => 'Mozilla/5.0 (Linux; Android 5.1.1; SM-G928X Build/LMY47X) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.83 Mobile Safari/537.36').read
 		json = JSON.parse(response)
 		if json.nil?
 			puts"error in login"
@@ -65,7 +65,7 @@ module VhackXt
 			user = getUserInfo[0]
 			pass = getUserInfo[1]
 			url = "https://api.vhack.cc/mobile/15/update.php?user=#{user}&pass=#{pass}"
-	        response = open(url, 'User-Agent' => 'Discord bot', 'api-version' => '2').read
+	        response = open(url, 'User-Agent' => 'Mozilla/5.0 (Linux; Android 5.1.1; SM-G928X Build/LMY47X) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.83 Mobile Safari/537.36').read
 			user_data = JSON.parse(response)
 			return user_data
 		end
@@ -83,7 +83,7 @@ module VhackXt
             user = userAndPass[0]
             pass = userAndPass[1]
             url = "https://api.vhack.cc/mobile/15/login.php?user=#{user}&pass=#{pass}"
-            response = open(url, 'User-Agent' => 'Discord bot', 'api-version' => '2').read
+            response = open(url, 'User-Agent' => 'Mozilla/5.0 (Linux; Android 5.1.1; SM-G928X Build/LMY47X) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.83 Mobile Safari/537.36').read
             json = JSON.parse(response)
 
             if json.nil?
@@ -108,7 +108,7 @@ module VhackXt
                 user = getUserInfo[0]
                 pass = getUserInfo[1]
                 url = "https://api.vhack.cc/mobile/15/update.php?user=#{user}&pass=#{pass}"
-                response = open(url, 'User-Agent' => 'Discord bot', 'api-version' => '2').read
+                response = open(url, 'User-Agent' => 'Mozilla/5.0 (Linux; Android 5.1.1; SM-G928X Build/LMY47X) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.83 Mobile Safari/537.36', 'api-version' => '2').read
                 user_data = JSON.parse(response)
                 return user_data, username
             end
@@ -412,7 +412,7 @@ module VhackXt
     	user = getUserInfo[0]
 		pass = getUserInfo[1]
     	url = "https://api.vhack.cc/mobile/15/log.php?user=#{user}&pass=#{pass}"
-        response = open(url, 'User-Agent' => 'Discord bot', 'api-version' => '2').read
+        response = open(url, 'User-Agent' => 'Mozilla/5.0 (Linux; Android 5.1.1; SM-G928X Build/LMY47X) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.83 Mobile Safari/537.36').read
 		user_data = JSON.parse(response)
 		return user_data
     end
