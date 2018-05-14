@@ -7,7 +7,7 @@ rescue LoadError => e
   `gem install terminal-table`
 end
 begin
-    require'colorize'
+    require 'colorize'
 rescue LoadError => e
   puts e.message
   puts"Installing colorize...."
