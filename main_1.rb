@@ -19,25 +19,6 @@ password = gets.chomp
 
 
 login_info = VhackXt.login(username, password)
-=begin
-puts Parse.ParseLogIn()
-print"root@LogIn>".green
-login_option = gets.chomp
-if login_option == "1"
-	username = "gambino"
-	password = "derby3333"
-	login_info = VhackXt.login(username, password)
-elsif login_option == "2"
-	puts"[+] You dont need to enter .txt or /accounts"
-	accounts = Dir["accounts/*.txt"]
-	puts accounts
-	puts"[+] You dont need to enter .txt or /accounts"
-	print"Root@Account> ".green
-	username = gets.chomp
-	login_info = VhackXt.FileLogin(username)[1]
-
-end
-=end
 while true
 	login_info = VhackXt.login(username, password)
 	puts Parse.Main()
