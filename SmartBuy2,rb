@@ -1,0 +1,64 @@
+require_relative 'lib/vhackOs'
+require_relative 'lib/parse'
+username = ""
+password = ""
+
+login_info = VhackXt.login(username, password)
+puts Parse.RankOrder()
+puts"[+] Info: This script will upgrade an app in a certain order, if you have enough money. If you don't have enough money it will keeping going up rank until it finds on if you have enough money for."
+puts"It will stop after 10 loops."
+puts
+i = 0
+while true
+for i in 0..10
+	store = VhackXt.GetStore(username)
+	puts"[+] Loop #{i}"
+	# FIREWALL
+	if  store["money"].to_i >= store["apps"]["2".to_i]["price"].to_i
+		puts"[+] Rank: 1"
+		VhackXt.Store(username, "2")
+		puts"[+] Bought Firewall"
+		store = VhackXt.GetStore(username)
+		puts"Current Amount: $" + Parse.Comma(store["money"])
+		puts
+	# Bank Protection
+	elsif store["money"].to_i >= store["apps"]["5".to_i]["price"].to_i
+		puts"[+] Rank: 2"
+		VhackXt.Store(username, "5")
+		puts"[+] Bought Bank Protection"
+		store = VhackXt.GetStore(username)
+		puts"Current Amount: $" + Parse.Comma(store["money"])
+		puts
+	#SDK
+	elsif store["money"].to_i >= store["apps"]["6".to_i]["price"].to_i
+		puts"[+] Rank: 3"
+		VhackXt.Store(username, "6")
+		puts"[+] Bought SDK"
+		store = VhackXt.GetStore(username)
+		puts"Current Amount: $" + Parse.Comma(store["money"])
+		puts
+	#Brute Forced
+	elsif store["money"].to_i >= store["apps"]["4".to_i]["price"].to_i
+		puts"[+] Rank: 4"
+		VhackXt.Store(username, "4")
+		puts"[+] Bought Brute Force"
+		store = VhackXt.GetStore(username)
+		puts"Current Amount: $" + Parse.Comma(store["money"])
+		puts
+	#Spam
+	elsif store["money"].to_i >= store["apps"]["3".to_i]["price"].to_i
+		puts"[+] Rank: 5"
+		VhackXt.Store(username, "3")
+		puts"[+] Bought Spam"
+		store = VhackXt.GetStore(username)
+		puts"Current Amount: $" + Parse.Comma(store["money"])
+		puts
+	else
+		puts"[+] You dont have enought money"
+		break
+	end
+sleep(30)
+i += 1
+break if i == 10
+end
+end
