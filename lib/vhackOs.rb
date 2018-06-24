@@ -20,7 +20,7 @@ module VhackXt
         return json
     end
     def GenerateUserAndPass(login_info)
-    	hashed_info = (JSON[login_info]+JSON[login_info]+Digest::MD5.hexdigest(JSON[login_info]))
+        hashed_info = (JSON[login_info]+JSON[login_info]+Digest::MD5.hexdigest(JSON[login_info]))
         pass = Digest::MD5.hexdigest(hashed_info).gsub("==", "").gsub("=", "")
         user = Base64.encode64(JSON[login_info]).gsub("==", "").gsub("=", "")
         return user, pass
@@ -39,36 +39,36 @@ module VhackXt
         login(username, password)     
     end
     def login(username, password)
-    	password = Digest::MD5.hexdigest(password)
-    	login_info = {'username' => username, 'password' => password, 'lang' => "en"}
-    	userAndPass = GenerateUserAndPass(login_info)
-    	user = userAndPass[0]
+        password = Digest::MD5.hexdigest(password)
+        login_info = {'username' => username, 'password' => password, 'lang' => "en"}
+        userAndPass = GenerateUserAndPass(login_info)
+        user = userAndPass[0]
         pass = userAndPass[1]
         url = "https://api.vhack.cc/mobile/19/login.php?user=#{user}&pass=#{pass}"
         response = open(url, 'User-Agent' => 'Mozilla/5.0 (Linux; Android 5.1.1; SM-G928X Build/LMY47X) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.83 Mobile Safari/537.36').read
-		json = JSON.parse(response)
-		if json.nil?
-			puts"error in login"
-		else
-			login_info = {
-				"uid" => json['uid'], 
-				"accesstoken" => json['accesstoken']
-			}
-			Dir.mkdir("accounts") unless Dir.exist?("accounts")
-			f = File.open("accounts/#{username}.json", "w") unless File.exist?("accounts/#{username}")
-			f << JSON[login_info]
-			f.close
-			login_info["lastread"] = 0
-			login_info["notify"] = 1
+        json = JSON.parse(response)
+        if json.nil?
+            puts"error in login"
+        else
+            login_info = {
+                "uid" => json['uid'], 
+                "accesstoken" => json['accesstoken']
+            }
+            Dir.mkdir("accounts") unless Dir.exist?("accounts")
+            f = File.open("accounts/#{username}.json", "w") unless File.exist?("accounts/#{username}")
+            f << JSON[login_info]
+            f.close
+            login_info["lastread"] = 0
+            login_info["notify"] = 1
             login_info["token"] = ""
-			getUserInfo = GenerateUserAndPass(login_info)
-			user = getUserInfo[0]
-			pass = getUserInfo[1]
-			url = "https://api.vhack.cc/mobile/19/update.php?user=#{user}&pass=#{pass}"
-	        response = open(url, 'User-Agent' => 'Mozilla/5.0 (Linux; Android 5.1.1; SM-G928X Build/LMY47X) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.83 Mobile Safari/537.36').read
-			user_data = JSON.parse(response)
-			return user_data
-		end
+            getUserInfo = GenerateUserAndPass(login_info)
+            user = getUserInfo[0]
+            pass = getUserInfo[1]
+            url = "https://api.vhack.cc/mobile/19/update.php?user=#{user}&pass=#{pass}"
+            response = open(url, 'User-Agent' => 'Mozilla/5.0 (Linux; Android 5.1.1; SM-G928X Build/LMY47X) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.83 Mobile Safari/537.36').read
+            user_data = JSON.parse(response)
+            return user_data
+        end
     end
     def FileLogin(filename)
         f = File.open("accounts/#{filename}.txt", "r").each do |login|
@@ -175,42 +175,42 @@ module VhackXt
 
     end
     def ParseUserInfo(login_info)
-    	user = [
-    		    "=======================================",
-    		    "                USER INFO              ",
-    		    "=======================================",
-    	        "Username: #{login_info["username"]}",
-    	        "User Id: #{login_info["uid"]}",
-    	        "Exploits: #{login_info["exploits"]}",
-    	        "EXP: #{login_info["exp"].to_s.reverse.gsub(/(\d{3})(?=\d)/, '\\1,').reverse}",
-    	        "Exp Require #{login_info["expreq"].to_s.reverse.gsub(/(\d{3})(?=\d)/, '\\1,').reverse}",
-    	        "ExPCC: #{login_info["exppc"]}",
-    	        "Netcoins: #{login_info["netcoins"].to_s.reverse.gsub(/(\d{3})(?=\d)/, '\\1,').reverse}",
-    	        "Level: #{login_info["level"]}",
-    	        "Money: $#{login_info["money"].to_s.reverse.gsub(/(\d{3})(?=\d)/, '\\1,').reverse}}",
-    	        "IP address: #{login_info["ipaddress"]}",
-    	        "Task Finish: #{login_info["taskfinish"]}",
-    	        "Internet: #{login_info["inet"]}",
-    	        "CColor:#{login_info["ccolor"]}",
-    	        "\n",
-    	        "=======================================",
-    		    "                APPS                   ",
-    		    "=======================================",
-    		    "Firewall: #{login_info["fw"].to_s.reverse.gsub(/(\d{3})(?=\d)/, '\\1,').reverse}",
-    		    "Anti Virus: #{login_info["av"].to_s.reverse.gsub(/(\d{3})(?=\d)/, '\\1,').reverse}",
-    		    "SDK: #{login_info["sdk"].to_s.reverse.gsub(/(\d{3})(?=\d)/, '\\1,').reverse}",
-    		    "Brute Force: #{login_info["brute"].to_s.reverse.gsub(/(\d{3})(?=\d)/, '\\1,').reverse}",
-    		    "Spam: #{login_info["spam"].to_s.reverse.gsub(/(\d{3})(?=\d)/, '\\1,').reverse}"
-    	    ]
-    	    return user
+        user = [
+                "=======================================",
+                "                USER INFO              ",
+                "=======================================",
+                "Username: #{login_info["username"]}",
+                "User Id: #{login_info["uid"]}",
+                "Exploits: #{login_info["exploits"]}",
+                "EXP: #{login_info["exp"].to_s.reverse.gsub(/(\d{3})(?=\d)/, '\\1,').reverse}",
+                "Exp Require #{login_info["expreq"].to_s.reverse.gsub(/(\d{3})(?=\d)/, '\\1,').reverse}",
+                "ExPCC: #{login_info["exppc"]}",
+                "Netcoins: #{login_info["netcoins"].to_s.reverse.gsub(/(\d{3})(?=\d)/, '\\1,').reverse}",
+                "Level: #{login_info["level"]}",
+                "Money: $#{login_info["money"].to_s.reverse.gsub(/(\d{3})(?=\d)/, '\\1,').reverse}}",
+                "IP address: #{login_info["ipaddress"]}",
+                "Task Finish: #{login_info["taskfinish"]}",
+                "Internet: #{login_info["inet"]}",
+                "CColor:#{login_info["ccolor"]}",
+                "\n",
+                "=======================================",
+                "                APPS                   ",
+                "=======================================",
+                "Firewall: #{login_info["fw"].to_s.reverse.gsub(/(\d{3})(?=\d)/, '\\1,').reverse}",
+                "Anti Virus: #{login_info["av"].to_s.reverse.gsub(/(\d{3})(?=\d)/, '\\1,').reverse}",
+                "SDK: #{login_info["sdk"].to_s.reverse.gsub(/(\d{3})(?=\d)/, '\\1,').reverse}",
+                "Brute Force: #{login_info["brute"].to_s.reverse.gsub(/(\d{3})(?=\d)/, '\\1,').reverse}",
+                "Spam: #{login_info["spam"].to_s.reverse.gsub(/(\d{3})(?=\d)/, '\\1,').reverse}"
+            ]
+            return user
     end
 
    
     def GetTasks(username)
-    	login_info = ReadJson(username)
-    	userAndPass = GenerateUserAndPass(login_info)
+        login_info = ReadJson(username)
+        userAndPass = GenerateUserAndPass(login_info)
         user_data = VhackXt.Main("tasks.php", username, userAndPass)
-	    return user_data
+        return user_data
     end
     def GetEndUpdateTime(username)
         upgrade =  GetTasks(username)
@@ -317,10 +317,10 @@ module VhackXt
         end
     end
     def GetSpam(username)
-    	login_info = ReadJson(username)
-    	userAndPass = GenerateUserAndPass(login_info)
-    	user_data = VhackXt.Main("spam.php", username, userAndPass)
-		return user_data
+        login_info = ReadJson(username)
+        userAndPass = GenerateUserAndPass(login_info)
+        user_data = VhackXt.Main("spam.php", username, userAndPass)
+        return user_data
     end
     def GetSDK(username)
         login_info = ReadJson(username)
@@ -336,7 +336,7 @@ module VhackXt
         end
     end
     def UnixConvert()
-    	return Time.at(time.to_i).strftime("%B %e, %Y at %I:%M %p")
+        return Time.at(time.to_i).strftime("%B %e, %Y at %I:%M %p")
     end
     def BruteTypes(*args)
         args = args.shift
@@ -361,21 +361,21 @@ module VhackXt
         end
     end
     def GetAppType(appid)
-    	case appid
+        case appid
         when "0"
             return "NotePad"
-    	when "1"
-    		return "Anti Virus"
-    	when "2"
-    		return "Firewall"
-    	when "3"
-    		return "Spam"
-    	when "4"
-    		return "Brute Force"
-    	when "5"
-    		return "Bank Protection"
-    	when "6"
-    		return "SDK"
+        when "1"
+            return "Anti Virus"
+        when "2"
+            return "Firewall"
+        when "3"
+            return "Spam"
+        when "4"
+            return "Brute Force"
+        when "5"
+            return "Bank Protection"
+        when "6"
+            return "SDK"
         when "7"
             return "Community"
         when "8"
@@ -390,7 +390,7 @@ module VhackXt
             return "Malware Kit"
         when "14"
             return "Jobs"
-    	end
+        end
     end
     def NodeType(*args)
         args = args.shift
@@ -407,14 +407,14 @@ module VhackXt
         user_data = VhackXt.Main("mwk.php", username, userAndPass)
     end
     def GetLog(username)
-    	login_info = ReadJson(username)
-    	getUserInfo = GenerateUserAndPass(login_info)
-    	user = getUserInfo[0]
-		pass = getUserInfo[1]
-    	url = "https://api.vhack.cc/mobile/19/log.php?user=#{user}&pass=#{pass}"
+        login_info = ReadJson(username)
+        getUserInfo = GenerateUserAndPass(login_info)
+        user = getUserInfo[0]
+        pass = getUserInfo[1]
+        url = "https://api.vhack.cc/mobile/19/log.php?user=#{user}&pass=#{pass}"
         response = open(url, 'User-Agent' => 'Mozilla/5.0 (Linux; Android 5.1.1; SM-G928X Build/LMY47X) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.83 Mobile Safari/537.36').read
-		user_data = JSON.parse(response)
-		return user_data
+        user_data = JSON.parse(response)
+        return user_data
     end
     def BruteList(username)
         login_info = ReadJson(username)
@@ -516,13 +516,13 @@ module VhackXt
         end
     end
     def Store(username, appcode)
-    	login_info = ReadJson(username)
-    	login_info["appcode"] = "#{appcode}"
-    	login_info["action"]  = 100
+        login_info = ReadJson(username)
+        login_info["appcode"] = "#{appcode}"
+        login_info["action"]  = 100
         userAndPass = GenerateUserAndPass(login_info)
         user_data = VhackXt.Main("store.php", username, userAndPass)
 
-    	return user_data
+        return user_data
     end
     def BuySingleSDK(username)
         login_info = ReadJson(username)
@@ -642,8 +642,8 @@ module VhackXt
         end
     end
     def GetNetwork(username)
-    	login_info = ReadJson(username)
-    	userAndPass = GenerateUserAndPass(login_info)
+        login_info = ReadJson(username)
+        userAndPass = GenerateUserAndPass(login_info)
         begin
             user_data = VhackXt.Main("network.php", username, userAndPass)
             return user_data
@@ -735,10 +735,10 @@ module VhackXt
         return json
     end
     def FalseFlag(username, target, log, fn)
-    	# log 1 => Generate random ip
+        # log 1 => Generate random ip
         # log 2 => normal
         # log 3 => file log
-    	#Anything other your own message
+        #Anything other your own message
         begin
             time = Time.new
             if log == 1 or log == "1"
@@ -940,7 +940,7 @@ module VhackXt
         end
     end
     def StartBrute(username, target)
-    	login_info = ReadJson(username)
+        login_info = ReadJson(username)
         login_info["target"] = target
         userAndPass = GenerateUserAndPass(login_info)
         begin
@@ -957,6 +957,21 @@ module VhackXt
             puts "Retrying...... please wait 20 seconds.".red
             sleep(20)
             retry
+        end
+    end
+    def SearchUsername(uname)
+        #NOTE: If i find you fucking arround my vps or scanning it, I will block your ip and if it still happens I will fucking stop doing this. 
+        url = "http://159.89.186.14:8080/scan/" + uname
+        begin
+            response = open(url.to_s, 'User-Agent' => 'Dalvik/1.6.0 (Linux; U; Android 4.1.1; BroadSign Xpress 1.0.14 B- (720) Build/JRO03H)', 'api-version' => '2').read
+            if response.length == "0"
+                puts"[+] No results buddy."
+            else
+                #return" Username: #{response.split(" ")[1]} \n IP: #{response.split(" ")[0]}"
+                return response.gsub("[", "").gsub("]", "")
+            end
+        rescue => e
+            puts "Exception Message: #{ e.message }".red
         end
     end
 
