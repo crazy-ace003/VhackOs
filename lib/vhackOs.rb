@@ -14,7 +14,7 @@ module VhackXt
     def Main(php, username, userAndPass)
         user = userAndPass[0]
         pass = userAndPass[1]
-        url = "https://api.vhack.cc/mobile/18/#{php}?user=#{user}&pass=#{pass}"
+        url = "https://api.vhack.cc/mobile/19/#{php}?user=#{user}&pass=#{pass}"
         response = open(url, 'User-Agent' => 'Dalvik/1.6.0 (Linux; U; Android 4.1.1; BroadSign Xpress 1.0.14 B- (720) Build/JRO03H)').read
         json = JSON.parse(response)
         return json
@@ -44,7 +44,7 @@ module VhackXt
     	userAndPass = GenerateUserAndPass(login_info)
     	user = userAndPass[0]
         pass = userAndPass[1]
-        url = "https://api.vhack.cc/mobile/18/login.php?user=#{user}&pass=#{pass}"
+        url = "https://api.vhack.cc/mobile/19/login.php?user=#{user}&pass=#{pass}"
         response = open(url, 'User-Agent' => 'Mozilla/5.0 (Linux; Android 5.1.1; SM-G928X Build/LMY47X) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.83 Mobile Safari/537.36').read
 		json = JSON.parse(response)
 		if json.nil?
@@ -64,7 +64,7 @@ module VhackXt
 			getUserInfo = GenerateUserAndPass(login_info)
 			user = getUserInfo[0]
 			pass = getUserInfo[1]
-			url = "https://api.vhack.cc/mobile/18/update.php?user=#{user}&pass=#{pass}"
+			url = "https://api.vhack.cc/mobile/19/update.php?user=#{user}&pass=#{pass}"
 	        response = open(url, 'User-Agent' => 'Mozilla/5.0 (Linux; Android 5.1.1; SM-G928X Build/LMY47X) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.83 Mobile Safari/537.36').read
 			user_data = JSON.parse(response)
 			return user_data
@@ -82,7 +82,7 @@ module VhackXt
             userAndPass = GenerateUserAndPass(login_info)
             user = userAndPass[0]
             pass = userAndPass[1]
-            url = "https://api.vhack.cc/mobile/18/login.php?user=#{user}&pass=#{pass}"
+            url = "https://api.vhack.cc/mobile/19/login.php?user=#{user}&pass=#{pass}"
             response = open(url, 'User-Agent' => 'Mozilla/5.0 (Linux; Android 5.1.1; SM-G928X Build/LMY47X) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.83 Mobile Safari/537.36').read
             json = JSON.parse(response)
 
@@ -107,7 +107,7 @@ module VhackXt
                 getUserInfo = GenerateUserAndPass(login_info)
                 user = getUserInfo[0]
                 pass = getUserInfo[1]
-                url = "https://api.vhack.cc/mobile/18/update.php?user=#{user}&pass=#{pass}"
+                url = "https://api.vhack.cc/mobile/19/update.php?user=#{user}&pass=#{pass}"
                 response = open(url, 'User-Agent' => 'Mozilla/5.0 (Linux; Android 5.1.1; SM-G928X Build/LMY47X) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.83 Mobile Safari/537.36', 'api-version' => '2').read
                 user_data = JSON.parse(response)
                 return user_data, username
@@ -411,7 +411,7 @@ module VhackXt
     	getUserInfo = GenerateUserAndPass(login_info)
     	user = getUserInfo[0]
 		pass = getUserInfo[1]
-    	url = "https://api.vhack.cc/mobile/18/log.php?user=#{user}&pass=#{pass}"
+    	url = "https://api.vhack.cc/mobile/19/log.php?user=#{user}&pass=#{pass}"
         response = open(url, 'User-Agent' => 'Mozilla/5.0 (Linux; Android 5.1.1; SM-G928X Build/LMY47X) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.83 Mobile Safari/537.36').read
 		user_data = JSON.parse(response)
 		return user_data
