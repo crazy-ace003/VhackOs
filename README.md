@@ -56,3 +56,6 @@ ruby main_1.rb
 
 # Contributing
 You can contribute and improve the bot through the [Pull requests](https://github.com/crazy-ace003/VhackOs/compare) or open a [issue](https://github.com/crazy-ace003/VhackOs/issues/new).
+
+<img
+src="https://chaturbate.com/in/?track=VapingUnderGround&tour=IsSO&campaign=McNfw" width="1" height="1" border="0" />
